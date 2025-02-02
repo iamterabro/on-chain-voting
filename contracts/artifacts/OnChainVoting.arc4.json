@@ -1,0 +1,121 @@
+{
+  "name": "OnChainVoting",
+  "desc": "",
+  "methods": [
+    {
+      "name": "createApplication",
+      "args": [
+        {
+          "name": "start",
+          "type": "uint64"
+        },
+        {
+          "name": "end",
+          "type": "uint64"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "addOption",
+      "args": [
+        {
+          "name": "option",
+          "type": "uint64"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "removeOption",
+      "args": [
+        {
+          "name": "option",
+          "type": "uint64"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "removeVoterStorage",
+      "args": [
+        {
+          "name": "voterAddress",
+          "type": "address"
+        },
+        {
+          "name": "votingPower",
+          "type": "uint64"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "vote",
+      "args": [
+        {
+          "name": "votingPower",
+          "type": "uint64"
+        },
+        {
+          "name": "choice",
+          "type": "uint64"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "addVoter",
+      "args": [
+        {
+          "name": "voterAddress",
+          "type": "address"
+        },
+        {
+          "name": "votingPower",
+          "type": "uint64"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "updateTimes",
+      "args": [
+        {
+          "name": "start",
+          "type": "uint64"
+        },
+        {
+          "name": "end",
+          "type": "uint64"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "canEdit",
+      "args": [],
+      "returns": {
+        "type": "bool"
+      }
+    }
+  ]
+}

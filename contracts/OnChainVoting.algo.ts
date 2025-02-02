@@ -1,57 +1,104 @@
 import { Contract } from '@algorandfoundation/tealscript';
 
+type VoterKey = {
+  address: Address;
+  votingPower: uint64;
+};
+
+type OptionDetails = {
+  votes: uint64;
+  description: string;
+};
+
+export type VoteOptionId = uint64;
+
+const HAS_VOTED: uint64 = 1;
+const HAS_NOT_VOTED: uint64 = 0;
+
 export class OnChainVoting extends Contract {
-  /**
-   * Calculates the sum of two numbers
-   *
-   * @param a
-   * @param b
-   * @returns The sum of a and b
-   */
-  private getSum(a: uint64, b: uint64): uint64 {
-    return a + b;
+  programVersion = 11;
+
+  // timestamp when the voting starts
+  votingStart = GlobalStateKey<uint64>({ key: 'start' });
+
+  // timestamp when the voting ends
+  votingEnd = GlobalStateKey<uint64>({ key: 'end' });
+
+  // the voters and their voting power. Value is whether the user has voted or not - 0 not voted, 1 voted
+  voters = BoxMap<VoterKey, uint64>({ prefix: 'voters' });
+
+  // the options that can be voted for. The key is the option voted for and the value is the number of votes and description.
+  options = BoxMap<VoteOptionId, OptionDetails>({ prefix: 'options' });
+
+  createApplication(start: uint64, end: uint64): void {
+    assert(start < end);
+    assert(globals.latestTimestamp < start);
+
+    this.votingStart.value = start;
+    this.votingEnd.value = end;
   }
 
-  /**
-   * Calculates the difference between two numbers
-   *
-   * @param a
-   * @param b
-   * @returns The difference between a and b.
-   */
-  private getDifference(a: uint64, b: uint64): uint64 {
-    return a >= b ? a - b : b - a;
+  addOption(option: VoteOptionId, description: string): void {
+    assert(this.canEdit());
+    assert(!this.options(option).exists);
+
+    this.options(option).value = {
+      description: description,
+      votes: 0,
+    };
   }
 
-  /**
-   * A method that takes two numbers and does either addition or subtraction
-   *
-   * @param a The first uint64
-   * @param b The second uint64
-   * @param operation The operation to perform. Can be either 'sum' or 'difference'
-   *
-   * @returns The result of the operation
-   */
-  doMath(a: uint64, b: uint64, operation: string): uint64 {
-    let result: uint64;
+  removeOption(option: VoteOptionId): void {
+    assert(this.canEdit());
+    assert(this.options(option).exists);
 
-    if (operation === 'sum') {
-      result = this.getSum(a, b);
-    } else if (operation === 'difference') {
-      result = this.getDifference(a, b);
-    } else throw Error('Invalid operation');
-
-    return result;
+    this.options(option).delete();
   }
 
-  /**
-   * A demonstration method used in the AlgoKit fullstack template.
-   * Greets the user by name.
-   *
-   * @param name The name of the user to greet.
-   * @returns A greeting message to the user.
-   */
-  hello(name: string): string {
-    return 'Hello, ' + name;
+  // can only be called after voting has finished. Does not alter the results - only reclaims box storage.
+  removeVoterStorage(voterAddress: Address, votingPower: uint64): void {
+    assert(globals.latestTimestamp > this.votingEnd.value);
+    assert(this.txn.sender === globals.creatorAddress);
+
+    this.voters({ address: voterAddress, votingPower: votingPower }).delete();
+  }
+
+  vote(votingPower: uint64, choice: VoteOptionId): void {
+    const voterAddress: Address = this.txn.sender;
+
+    assert(this.votingStart.value < globals.latestTimestamp);
+    assert(this.votingEnd.value > globals.latestTimestamp);
+    assert(this.voters({ address: voterAddress, votingPower: votingPower }).exists);
+    assert(this.voters({ address: voterAddress, votingPower: votingPower }).value === HAS_NOT_VOTED);
+    assert(this.options(choice).exists);
+
+    // increment the votes for the option
+    this.options(choice).value.votes += votingPower;
+
+    // mark voted
+    this.voters({ address: voterAddress, votingPower: votingPower }).value = HAS_VOTED;
+  }
+
+  addVoter(voterAddress: Address, votingPower: uint64): void {
+    assert(this.canEdit());
+    assert(!this.voters({ address: voterAddress, votingPower: votingPower }).exists);
+
+    this.voters({ address: voterAddress, votingPower: votingPower }).value = HAS_NOT_VOTED;
+    assert(this.voters({ address: voterAddress, votingPower: votingPower }).exists);
+    assert(this.voters({ address: voterAddress, votingPower: votingPower }).value === HAS_NOT_VOTED);
+  }
+
+  updateTimes(start: uint64, end: uint64): void {
+    assert(this.canEdit());
+    assert(start < end);
+    assert(start < this.votingEnd.value);
+    assert(end > this.votingStart.value);
+
+    this.votingStart.value = start;
+    this.votingEnd.value = end;
+  }
+
+  canEdit(): boolean {
+    return globals.latestTimestamp < this.votingStart.value && this.txn.sender === globals.creatorAddress;
   }
 }

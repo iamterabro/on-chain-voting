@@ -1,7 +1,7 @@
 import algosdk from 'algosdk';
 import { OnChainVotingClient } from '../contracts/clients/OnChainVotingClient';
 
-type OptionsBoxValue = {
+export type OptionsBoxValue = {
   votes: bigint;
   description: string;
 };

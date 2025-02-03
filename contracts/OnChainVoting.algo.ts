@@ -101,4 +101,14 @@ export class OnChainVoting extends Contract {
   canEdit(): boolean {
     return globals.latestTimestamp < this.votingStart.value && this.txn.sender === globals.creatorAddress;
   }
+
+  withdraw(amount: uint64): void {
+    assert(this.txn.sender === this.app.creator);
+
+    sendPayment({
+      receiver: this.app.creator,
+      amount: amount,
+      fee: 0,
+    });
+  }
 }

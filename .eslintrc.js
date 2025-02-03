@@ -21,6 +21,7 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'warn',
     'import/prefer-default-export': 'off',
     'no-use-before-define': 'off',
+    'no-control-regex': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',

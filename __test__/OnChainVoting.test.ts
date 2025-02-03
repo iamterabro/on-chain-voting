@@ -4,6 +4,7 @@ import { AlgorandClient, Config } from '@algorandfoundation/algokit-utils';
 import { AlgoAmount } from '@algorandfoundation/algokit-utils/types/amount';
 import { Account, generateAccount, makeBasicAccountTransactionSigner } from 'algosdk';
 import { OnChainVotingClient, OnChainVotingFactory } from '../contracts/clients/OnChainVotingClient';
+import { decodeOptionsBoxValue, getResults } from "../lib/voting";
 
 const fixture = algorandFixture();
 Config.configure({ populateAppCallResources: true });
@@ -82,6 +83,15 @@ describe('OnChainVoting', () => {
       await expect(vote(appClient.appId, { choice: 1, votingPower: 1 }, nonEligibleVotingAccount)).rejects.toThrow(
         /logic eval error/
       );
+    });
+
+    test('stores the correct voting results', async () => {
+      const results = await getResults(appClient);
+      expect(results[0].description).toEqual('Option 1');
+      expect(results[0].votes).toEqual(BigInt(1));
+
+      expect(results[1].description).toEqual('Option 2');
+      expect(results[1].votes).toEqual(BigInt(2));
     });
   });
 });

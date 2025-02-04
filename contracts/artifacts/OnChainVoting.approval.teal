@@ -24,8 +24,12 @@ switch *call_NoOp *NOT_IMPLEMENTED *NOT_IMPLEMENTED *NOT_IMPLEMENTED *NOT_IMPLEM
 	// The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?
 	err
 
-// createApplication(uint64,uint64)void
+// createApplication(uint64,uint64,string)void
 *abi_route_createApplication:
+	// proposal: string
+	txna ApplicationArgs 3
+	extract 2 0
+
 	// end: uint64
 	txna ApplicationArgs 2
 	btoi
@@ -34,39 +38,51 @@ switch *call_NoOp *NOT_IMPLEMENTED *NOT_IMPLEMENTED *NOT_IMPLEMENTED *NOT_IMPLEM
 	txna ApplicationArgs 1
 	btoi
 
-	// execute createApplication(uint64,uint64)void
+	// execute createApplication(uint64,uint64,string)void
 	callsub createApplication
 	intc 0 // 1
 	return
 
-// createApplication(start: uint64, end: uint64): void
+// createApplication(start: uint64, end: uint64, proposal: string): void
 createApplication:
-	proto 2 0
+	proto 3 0
 
-	// contracts/OnChainVoting.algo.ts:34
+	// contracts/OnChainVoting.algo.ts:37
 	// assert(start < end)
 	frame_dig -1 // start: uint64
 	frame_dig -2 // end: uint64
 	<
 	assert
 
-	// contracts/OnChainVoting.algo.ts:35
+	// contracts/OnChainVoting.algo.ts:38
 	// assert(globals.latestTimestamp < start)
 	global LatestTimestamp
 	frame_dig -1 // start: uint64
 	<
 	assert
 
-	// contracts/OnChainVoting.algo.ts:37
+	// contracts/OnChainVoting.algo.ts:40
 	// this.votingStart.value = start
 	bytec 2 //  "start"
 	frame_dig -1 // start: uint64
 	app_global_put
 
-	// contracts/OnChainVoting.algo.ts:38
+	// contracts/OnChainVoting.algo.ts:41
 	// this.votingEnd.value = end
 	bytec 3 //  "end"
 	frame_dig -2 // end: uint64
+	app_global_put
+
+	// contracts/OnChainVoting.algo.ts:42
+	// this.proposal.value = proposal
+	pushbytes 0x70726f706f73616c // "proposal"
+	frame_dig -3 // proposal: string
+	dup
+	len
+	itob
+	extract 6 2
+	swap
+	concat
 	app_global_put
 	retsub
 
@@ -89,12 +105,12 @@ createApplication:
 addOption:
 	proto 2 0
 
-	// contracts/OnChainVoting.algo.ts:42
+	// contracts/OnChainVoting.algo.ts:46
 	// assert(this.canEdit())
 	callsub canEdit
 	assert
 
-	// contracts/OnChainVoting.algo.ts:43
+	// contracts/OnChainVoting.algo.ts:47
 	// assert(!this.options(option).exists)
 	bytec 0 //  "options"
 	frame_dig -1 // option: VoteOptionId
@@ -106,7 +122,7 @@ addOption:
 	!
 	assert
 
-	// contracts/OnChainVoting.algo.ts:45
+	// contracts/OnChainVoting.algo.ts:49
 	// this.options(option).value = {
 	//       description: description,
 	//       votes: 0,
@@ -151,12 +167,12 @@ addOption:
 removeOption:
 	proto 1 0
 
-	// contracts/OnChainVoting.algo.ts:52
+	// contracts/OnChainVoting.algo.ts:56
 	// assert(this.canEdit())
 	callsub canEdit
 	assert
 
-	// contracts/OnChainVoting.algo.ts:53
+	// contracts/OnChainVoting.algo.ts:57
 	// assert(this.options(option).exists)
 	bytec 0 //  "options"
 	frame_dig -1 // option: VoteOptionId
@@ -167,7 +183,7 @@ removeOption:
 	pop
 	assert
 
-	// contracts/OnChainVoting.algo.ts:55
+	// contracts/OnChainVoting.algo.ts:59
 	// this.options(option).delete()
 	bytec 0 //  "options"
 	frame_dig -1 // option: VoteOptionId
@@ -201,7 +217,7 @@ removeOption:
 removeVoterStorage:
 	proto 2 0
 
-	// contracts/OnChainVoting.algo.ts:60
+	// contracts/OnChainVoting.algo.ts:64
 	// assert(globals.latestTimestamp > this.votingEnd.value)
 	global LatestTimestamp
 	bytec 3 //  "end"
@@ -209,14 +225,14 @@ removeVoterStorage:
 	>
 	assert
 
-	// contracts/OnChainVoting.algo.ts:61
+	// contracts/OnChainVoting.algo.ts:65
 	// assert(this.txn.sender === globals.creatorAddress)
 	txn Sender
 	global CreatorAddress
 	==
 	assert
 
-	// contracts/OnChainVoting.algo.ts:63
+	// contracts/OnChainVoting.algo.ts:67
 	// this.voters({ address: voterAddress, votingPower: votingPower }).delete()
 	bytec 1 //  "voters"
 	frame_dig -1 // voterAddress: Address
@@ -249,12 +265,12 @@ vote:
 	// Push empty bytes after the frame pointer to reserve space for local variables
 	bytec 4 // 0x
 
-	// contracts/OnChainVoting.algo.ts:67
+	// contracts/OnChainVoting.algo.ts:71
 	// voterAddress: Address = this.txn.sender
 	txn Sender
 	frame_bury 0 // voterAddress: Address
 
-	// contracts/OnChainVoting.algo.ts:69
+	// contracts/OnChainVoting.algo.ts:73
 	// assert(this.votingStart.value < globals.latestTimestamp)
 	bytec 2 //  "start"
 	app_global_get
@@ -262,7 +278,7 @@ vote:
 	<
 	assert
 
-	// contracts/OnChainVoting.algo.ts:70
+	// contracts/OnChainVoting.algo.ts:74
 	// assert(this.votingEnd.value > globals.latestTimestamp)
 	bytec 3 //  "end"
 	app_global_get
@@ -270,7 +286,7 @@ vote:
 	>
 	assert
 
-	// contracts/OnChainVoting.algo.ts:71
+	// contracts/OnChainVoting.algo.ts:75
 	// assert(this.voters({ address: voterAddress, votingPower: votingPower }).exists)
 	bytec 1 //  "voters"
 	frame_dig 0 // voterAddress: Address
@@ -283,7 +299,7 @@ vote:
 	pop
 	assert
 
-	// contracts/OnChainVoting.algo.ts:72
+	// contracts/OnChainVoting.algo.ts:76
 	// assert(this.voters({ address: voterAddress, votingPower: votingPower }).value === HAS_NOT_VOTED)
 	bytec 1 //  "voters"
 	frame_dig 0 // voterAddress: Address
@@ -300,7 +316,7 @@ vote:
 	==
 	assert
 
-	// contracts/OnChainVoting.algo.ts:73
+	// contracts/OnChainVoting.algo.ts:77
 	// assert(this.options(choice).exists)
 	bytec 0 //  "options"
 	frame_dig -2 // choice: VoteOptionId
@@ -311,7 +327,7 @@ vote:
 	pop
 	assert
 
-	// contracts/OnChainVoting.algo.ts:76
+	// contracts/OnChainVoting.algo.ts:80
 	// this.options(choice).value.votes += votingPower
 	bytec 0 //  "options"
 	frame_dig -2 // choice: VoteOptionId
@@ -350,7 +366,7 @@ vote:
 	swap
 	box_put
 
-	// contracts/OnChainVoting.algo.ts:79
+	// contracts/OnChainVoting.algo.ts:83
 	// this.voters({ address: voterAddress, votingPower: votingPower }).value = HAS_VOTED
 	bytec 1 //  "voters"
 	frame_dig 0 // voterAddress: Address
@@ -387,12 +403,12 @@ vote:
 addVoter:
 	proto 2 0
 
-	// contracts/OnChainVoting.algo.ts:83
+	// contracts/OnChainVoting.algo.ts:87
 	// assert(this.canEdit())
 	callsub canEdit
 	assert
 
-	// contracts/OnChainVoting.algo.ts:84
+	// contracts/OnChainVoting.algo.ts:88
 	// assert(!this.voters({ address: voterAddress, votingPower: votingPower }).exists)
 	bytec 1 //  "voters"
 	frame_dig -1 // voterAddress: Address
@@ -406,7 +422,7 @@ addVoter:
 	!
 	assert
 
-	// contracts/OnChainVoting.algo.ts:86
+	// contracts/OnChainVoting.algo.ts:90
 	// this.voters({ address: voterAddress, votingPower: votingPower }).value = HAS_NOT_VOTED
 	bytec 1 //  "voters"
 	frame_dig -1 // voterAddress: Address
@@ -417,7 +433,7 @@ addVoter:
 	bytec 5 // 0x0000000000000000
 	box_put
 
-	// contracts/OnChainVoting.algo.ts:87
+	// contracts/OnChainVoting.algo.ts:91
 	// assert(this.voters({ address: voterAddress, votingPower: votingPower }).exists)
 	bytec 1 //  "voters"
 	frame_dig -1 // voterAddress: Address
@@ -430,7 +446,7 @@ addVoter:
 	pop
 	assert
 
-	// contracts/OnChainVoting.algo.ts:88
+	// contracts/OnChainVoting.algo.ts:92
 	// assert(this.voters({ address: voterAddress, votingPower: votingPower }).value === HAS_NOT_VOTED)
 	bytec 1 //  "voters"
 	frame_dig -1 // voterAddress: Address
@@ -467,19 +483,19 @@ addVoter:
 updateTimes:
 	proto 2 0
 
-	// contracts/OnChainVoting.algo.ts:92
+	// contracts/OnChainVoting.algo.ts:96
 	// assert(this.canEdit())
 	callsub canEdit
 	assert
 
-	// contracts/OnChainVoting.algo.ts:93
+	// contracts/OnChainVoting.algo.ts:97
 	// assert(start < end)
 	frame_dig -1 // start: uint64
 	frame_dig -2 // end: uint64
 	<
 	assert
 
-	// contracts/OnChainVoting.algo.ts:94
+	// contracts/OnChainVoting.algo.ts:98
 	// assert(start < this.votingEnd.value)
 	frame_dig -1 // start: uint64
 	bytec 3 //  "end"
@@ -487,7 +503,7 @@ updateTimes:
 	<
 	assert
 
-	// contracts/OnChainVoting.algo.ts:95
+	// contracts/OnChainVoting.algo.ts:99
 	// assert(end > this.votingStart.value)
 	frame_dig -2 // end: uint64
 	bytec 2 //  "start"
@@ -495,13 +511,13 @@ updateTimes:
 	>
 	assert
 
-	// contracts/OnChainVoting.algo.ts:97
+	// contracts/OnChainVoting.algo.ts:101
 	// this.votingStart.value = start
 	bytec 2 //  "start"
 	frame_dig -1 // start: uint64
 	app_global_put
 
-	// contracts/OnChainVoting.algo.ts:98
+	// contracts/OnChainVoting.algo.ts:102
 	// this.votingEnd.value = end
 	bytec 3 //  "end"
 	frame_dig -2 // end: uint64
@@ -528,7 +544,7 @@ updateTimes:
 canEdit:
 	proto 0 1
 
-	// contracts/OnChainVoting.algo.ts:102
+	// contracts/OnChainVoting.algo.ts:106
 	// return globals.latestTimestamp < this.votingStart.value && this.txn.sender === globals.creatorAddress;
 	global LatestTimestamp
 	bytec 2 //  "start"
@@ -544,8 +560,63 @@ canEdit:
 *skip_and0:
 	retsub
 
+// withdraw(uint64)void
+*abi_route_withdraw:
+	// amount: uint64
+	txna ApplicationArgs 1
+	btoi
+
+	// execute withdraw(uint64)void
+	callsub withdraw
+	intc 0 // 1
+	return
+
+// withdraw(amount: uint64): void
+withdraw:
+	proto 1 0
+
+	// contracts/OnChainVoting.algo.ts:110
+	// assert(this.txn.sender === this.app.creator)
+	txn Sender
+	txna Applications 0
+	app_params_get AppCreator
+	pop
+	==
+	assert
+
+	// contracts/OnChainVoting.algo.ts:112
+	// sendPayment({
+	//       receiver: this.app.creator,
+	//       amount: amount,
+	//       fee: 0,
+	//     })
+	itxn_begin
+	intc 0 //  pay
+	itxn_field TypeEnum
+
+	// contracts/OnChainVoting.algo.ts:113
+	// receiver: this.app.creator
+	txna Applications 0
+	app_params_get AppCreator
+	pop
+	itxn_field Receiver
+
+	// contracts/OnChainVoting.algo.ts:114
+	// amount: amount
+	frame_dig -1 // amount: uint64
+	itxn_field Amount
+
+	// contracts/OnChainVoting.algo.ts:115
+	// fee: 0
+	intc 1 // 0
+	itxn_field Fee
+
+	// Submit inner transaction
+	itxn_submit
+	retsub
+
 *create_NoOp:
-	pushbytes 0x917c48b6 // method "createApplication(uint64,uint64)void"
+	pushbytes 0xc3836715 // method "createApplication(uint64,uint64,string)void"
 	txna ApplicationArgs 0
 	match *abi_route_createApplication
 
@@ -560,8 +631,9 @@ canEdit:
 	pushbytes 0xb52f8ecd // method "addVoter(address,uint64)void"
 	pushbytes 0xe55da16a // method "updateTimes(uint64,uint64)void"
 	pushbytes 0xaec3e246 // method "canEdit()bool"
+	pushbytes 0x21f1ddff // method "withdraw(uint64)void"
 	txna ApplicationArgs 0
-	match *abi_route_addOption *abi_route_removeOption *abi_route_removeVoterStorage *abi_route_vote *abi_route_addVoter *abi_route_updateTimes *abi_route_canEdit
+	match *abi_route_addOption *abi_route_removeOption *abi_route_removeVoterStorage *abi_route_vote *abi_route_addVoter *abi_route_updateTimes *abi_route_canEdit *abi_route_withdraw
 
 	// this contract does not implement the given ABI method for call NoOp
 	err

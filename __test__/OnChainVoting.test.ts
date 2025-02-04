@@ -4,7 +4,7 @@ import { AlgorandClient, Config } from '@algorandfoundation/algokit-utils';
 import { AlgoAmount } from '@algorandfoundation/algokit-utils/types/amount';
 import { Account, generateAccount, makeBasicAccountTransactionSigner } from 'algosdk';
 import { OnChainVotingClient, OnChainVotingFactory } from '../contracts/clients/OnChainVotingClient';
-import { decodeOptionsBoxValue, getResults } from "../lib/voting";
+import { getProposal, getResults } from '../lib/voting';
 
 const fixture = algorandFixture();
 Config.configure({ populateAppCallResources: true });
@@ -35,9 +35,10 @@ describe('OnChainVoting', () => {
     let appClient: OnChainVotingClient;
     let eligibleVotingAccount: Account;
     let nonEligibleVotingAccount: Account;
+    const proposal = 'Distribution of Rewards Amongst Various Programs';
 
     test('creates the application', async () => {
-      appClient = await createAndFundApplication(clientFactory, algorandClient);
+      appClient = await createAndFundApplication(clientFactory, algorandClient, proposal);
     });
 
     test('creates voting accounts', async () => {
@@ -93,6 +94,11 @@ describe('OnChainVoting', () => {
       expect(results[1].description).toEqual('Option 2');
       expect(results[1].votes).toEqual(BigInt(2));
     });
+
+    test('get the proposal', async () => {
+      const appProposal = await getProposal(appClient);
+      expect(appProposal).toEqual(proposal);
+    });
   });
 });
 
@@ -109,11 +115,14 @@ async function vote(appId: bigint, userVote: { choice: number; votingPower: numb
 
 async function createAndFundApplication(
   factory: OnChainVotingFactory,
-  algorand: AlgorandClient
+  algorand: AlgorandClient,
+  proposal: string
 ): Promise<OnChainVotingClient> {
   const start = BigInt(Math.floor(Date.now() / 1000) + 10); // 10 seconds in future
   const end = BigInt(Math.floor(Date.now() / 1000) + 60); // 60 seconds in future
-  const createResult = await factory.send.create.createApplication({ args: [start, end] });
+  const createResult = await factory.send.create.createApplication({
+    args: [start, end, proposal],
+  });
   const { appClient } = createResult;
 
   await algorand.account.ensureFunded(

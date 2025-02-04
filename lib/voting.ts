@@ -24,6 +24,10 @@ export const getResults = async (client: OnChainVotingClient): Promise<OptionsBo
   return results;
 };
 
+export const getProposal = async (client: OnChainVotingClient): Promise<string | undefined> => {
+  return client.state.global.proposal();
+};
+
 export const decodeOptionsBoxValue = (value: Uint8Array): OptionsBoxValue => {
   const votes = algosdk.bytesToBigInt(value.slice(0, 8));
 

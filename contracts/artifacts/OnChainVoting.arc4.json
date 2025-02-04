@@ -12,6 +12,10 @@
         {
           "name": "end",
           "type": "uint64"
+        },
+        {
+          "name": "proposal",
+          "type": "string"
         }
       ],
       "returns": {
@@ -115,6 +119,18 @@
       "args": [],
       "returns": {
         "type": "bool"
+      }
+    },
+    {
+      "name": "withdraw",
+      "args": [
+        {
+          "name": "amount",
+          "type": "uint64"
+        }
+      ],
+      "returns": {
+        "type": "void"
       }
     }
   ]

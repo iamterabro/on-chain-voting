@@ -30,12 +30,16 @@ export class OnChainVoting extends Contract {
   // the options that can be voted for. The key is the option voted for and the value is the number of votes and description.
   options = BoxMap<VoteOptionId, OptionDetails>({ prefix: 'options' });
 
-  createApplication(start: uint64, end: uint64): void {
+  // explains the purpose of the vote
+  proposal = GlobalStateKey<string>({ key: 'proposal' });
+
+  createApplication(start: uint64, end: uint64, proposal: string): void {
     assert(start < end);
     assert(globals.latestTimestamp < start);
 
     this.votingStart.value = start;
     this.votingEnd.value = end;
+    this.proposal.value = proposal;
   }
 
   addOption(option: VoteOptionId, description: string): void {

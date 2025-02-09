@@ -1,12 +1,32 @@
-import algosdk from 'algosdk';
+import algosdk, { decodeUint64, encodeAddress } from 'algosdk';
 import { OnChainVotingClient } from '../contracts/clients/OnChainVotingClient';
+
+export type VotingPower = {
+  address: string;
+  votingPower: bigint;
+};
 
 export type OptionsBoxValue = {
   votes: bigint;
   description: string;
 };
 
-export const getResults = async (client: OnChainVotingClient): Promise<OptionsBoxValue[]> => {
+export type GlobalState = {
+  votingStart: bigint;
+  votingEnd: bigint;
+  proposal: string;
+};
+
+export const getGlobalState = async (client: OnChainVotingClient): Promise<GlobalState> => {
+  const all = await client.state.global.getAll();
+  return {
+    votingStart: all.votingStart as bigint,
+    votingEnd: all.votingEnd as bigint,
+    proposal: all.proposal as string,
+  };
+};
+
+export const getOptions = async (client: OnChainVotingClient): Promise<OptionsBoxValue[]> => {
   const optionsBoxes = await client.appClient.getBoxValues((box) => box.name.startsWith('options'));
   const results = await Promise.all(
     optionsBoxes.map(async (box) => {
@@ -43,3 +63,33 @@ export const decodeOptionsBoxValue = (value: Uint8Array): OptionsBoxValue => {
     description,
   };
 };
+
+export async function getUserVotingPower(
+  client: OnChainVotingClient,
+  userAddress: string
+): Promise<VotingPower | undefined> {
+  const boxNames = await client.appClient.getBoxNames();
+  let decodedVoterBox: VotingPower | undefined;
+
+  const voterBox = boxNames.find((boxName) => {
+    if (!boxName.name.startsWith('voters')) {
+      return false;
+    }
+    const decodedBox = decodeVoterBox(boxName.nameRaw);
+    if (decodedBox.address === userAddress) {
+      decodedVoterBox = decodedBox;
+      return true;
+    }
+    return false;
+  });
+
+  return voterBox ? decodedVoterBox : undefined;
+}
+
+export function decodeVoterBox(boxNameRaw: Uint8Array): { address: string; votingPower: bigint } {
+  const prefix = new TextEncoder().encode('voters');
+  const withoutPrefix = boxNameRaw.slice(prefix.length);
+  const address = encodeAddress(withoutPrefix.slice(0, 32));
+  const votingPower = decodeUint64(withoutPrefix.slice(32, 40), 'bigint');
+  return { address, votingPower };
+}

@@ -4,7 +4,7 @@ import { AlgorandClient, Config } from '@algorandfoundation/algokit-utils';
 import { AlgoAmount } from '@algorandfoundation/algokit-utils/types/amount';
 import { Account, generateAccount, makeBasicAccountTransactionSigner } from 'algosdk';
 import { OnChainVotingClient, OnChainVotingFactory } from '../contracts/clients/OnChainVotingClient';
-import { getProposal, getResults } from '../lib/voting';
+import { getGlobalState, getProposal, getOptions, getUserVotingPower } from '../lib/voting';
 
 const fixture = algorandFixture();
 Config.configure({ populateAppCallResources: true });
@@ -39,6 +39,12 @@ describe('OnChainVoting', () => {
 
     test('creates the application', async () => {
       appClient = await createAndFundApplication(clientFactory, algorandClient, proposal);
+
+      const globalState = await getGlobalState(appClient);
+      expect(globalState.proposal).toEqual(proposal);
+      expect(globalState.votingStart).toBeGreaterThan(0);
+      expect(globalState.votingEnd).toBeGreaterThan(0);
+      expect(globalState.votingStart).toBeLessThan(globalState.votingEnd);
     });
 
     test('creates voting accounts', async () => {
@@ -49,11 +55,21 @@ describe('OnChainVoting', () => {
     test('adds voting options', async () => {
       await addVotingOption(appClient, { optionId: 1, description: 'Option 1' });
       await addVotingOption(appClient, { optionId: 2, description: 'Option 2' });
+
+      const options = await getOptions(appClient);
+      expect(options[0].description).toEqual('Option 1');
+      expect(options[1].description).toEqual('Option 2');
     });
 
     test('adds voters', async () => {
       await addVoter(appClient, { address: fixture.context.testAccount.addr, votingPower: 1 });
       await addVoter(appClient, { address: eligibleVotingAccount.addr, votingPower: 2 });
+
+      const user1VotingPower = await getUserVotingPower(appClient, fixture.context.testAccount.addr);
+      expect(user1VotingPower).toEqual({ address: fixture.context.testAccount.addr, votingPower: BigInt(1) });
+
+      const user2VotingPower = await getUserVotingPower(appClient, eligibleVotingAccount.addr);
+      expect(user2VotingPower).toEqual({ address: eligibleVotingAccount.addr, votingPower: BigInt(2) });
     });
 
     test('starts the voting', async () => {
@@ -87,7 +103,7 @@ describe('OnChainVoting', () => {
     });
 
     test('stores the correct voting results', async () => {
-      const results = await getResults(appClient);
+      const results = await getOptions(appClient);
       expect(results[0].description).toEqual('Option 1');
       expect(results[0].votes).toEqual(BigInt(1));
 

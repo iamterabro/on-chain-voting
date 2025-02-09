@@ -95,8 +95,6 @@ export class OnChainVoting extends Contract {
   updateTimes(start: uint64, end: uint64): void {
     assert(this.canEdit());
     assert(start < end);
-    assert(start < this.votingEnd.value);
-    assert(end > this.votingStart.value);
 
     this.votingStart.value = start;
     this.votingEnd.value = end;

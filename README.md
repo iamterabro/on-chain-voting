@@ -6,7 +6,7 @@ This is an algorand smart contract used for weighted on-chain voting.
 
 This contract assumes the creator manages storage separately and covers costs associated with on-chain storage. Methods are provided to remove storage (without affecting voting results) and to withdraw algos from the contract.
 
-Boxes are used for store a user wallet and vote - simple key/value pairs.
+Boxes are used for storing a user wallet and vote - simple key/value pairs.
 
 ```
 {user_address}{voting_power} -> {vote}

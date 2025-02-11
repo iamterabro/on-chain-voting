@@ -6,6 +6,11 @@ export type VotingPower = {
   votingPower: bigint;
 };
 
+export type UserVote = {
+  hasVoted: boolean;
+  votingPower: VotingPower;
+};
+
 export type Option = {
   optionId: bigint;
   option: OptionsBoxValue;
@@ -70,12 +75,10 @@ export const decodeOptionsBoxValue = (value: Uint8Array): OptionsBoxValue => {
   };
 };
 
-export async function getUserVotingPower(
-  client: OnChainVotingClient,
-  userAddress: string
-): Promise<VotingPower | undefined> {
+export async function getUserVote(client: OnChainVotingClient, userAddress: string): Promise<UserVote | undefined> {
   const boxNames = await client.appClient.getBoxNames();
   let decodedVoterBox: VotingPower | undefined;
+  let rawBoxName: Uint8Array | undefined;
 
   const voterBox = boxNames.find((boxName) => {
     if (!boxName.name.startsWith('voters')) {
@@ -84,12 +87,19 @@ export async function getUserVotingPower(
     const decodedBox = decodeVoterBoxName(boxName.nameRaw);
     if (decodedBox.address === userAddress) {
       decodedVoterBox = decodedBox;
+      rawBoxName = boxName.nameRaw;
       return true;
     }
     return false;
   });
 
-  return voterBox ? decodedVoterBox : undefined;
+  let hasVoted = false;
+  if (voterBox) {
+    const value = await client.appClient.getBoxValue(rawBoxName!);
+    hasVoted = algosdk.bytesToBigInt(value.slice(0, 8)) === BigInt(1);
+  }
+
+  return decodedVoterBox ? { votingPower: decodedVoterBox!, hasVoted } : undefined;
 }
 
 export function decodeVoterBoxName(boxNameRaw: Uint8Array): { address: string; votingPower: bigint } {

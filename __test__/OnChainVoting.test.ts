@@ -4,7 +4,7 @@ import { AlgorandClient, Config } from '@algorandfoundation/algokit-utils';
 import { AlgoAmount } from '@algorandfoundation/algokit-utils/types/amount';
 import { Account, generateAccount, makeBasicAccountTransactionSigner } from 'algosdk';
 import { OnChainVotingClient, OnChainVotingFactory } from '../contracts/clients/OnChainVotingClient';
-import { getGlobalState, getProposal, getOptions, getUserVotingPower } from '../lib/voting';
+import { getGlobalState, getProposal, getOptions, getUserVote } from '../lib/voting';
 
 const fixture = algorandFixture();
 Config.configure({ populateAppCallResources: true });
@@ -67,11 +67,14 @@ describe('OnChainVoting', () => {
       await addVoter(appClient, { address: fixture.context.testAccount.addr, votingPower: 1 });
       await addVoter(appClient, { address: eligibleVotingAccount.addr, votingPower: 2 });
 
-      const user1VotingPower = await getUserVotingPower(appClient, fixture.context.testAccount.addr);
-      expect(user1VotingPower).toEqual({ address: fixture.context.testAccount.addr, votingPower: BigInt(1) });
+      const user1VotingPower = await getUserVote(appClient, fixture.context.testAccount.addr);
+      expect(user1VotingPower?.votingPower).toEqual({
+        address: fixture.context.testAccount.addr,
+        votingPower: BigInt(1),
+      });
 
-      const user2VotingPower = await getUserVotingPower(appClient, eligibleVotingAccount.addr);
-      expect(user2VotingPower).toEqual({ address: eligibleVotingAccount.addr, votingPower: BigInt(2) });
+      const user2VotingPower = await getUserVote(appClient, eligibleVotingAccount.addr);
+      expect(user2VotingPower?.votingPower).toEqual({ address: eligibleVotingAccount.addr, votingPower: BigInt(2) });
     });
 
     test('starts the voting', async () => {
@@ -83,6 +86,10 @@ describe('OnChainVoting', () => {
     test('eligible users votes', async () => {
       await vote(appClient.appId, { choice: 1, votingPower: 1 }, fixture.context.testAccount);
       await vote(appClient.appId, { choice: 2, votingPower: 2 }, eligibleVotingAccount);
+
+      // check user marked as voted
+      const user1VotingPower = await getUserVote(appClient, fixture.context.testAccount.addr);
+      expect(user1VotingPower?.hasVoted).toEqual(true);
     });
 
     test('cannot vote again', async () => {

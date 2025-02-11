@@ -6,6 +6,11 @@ export type VotingPower = {
   votingPower: bigint;
 };
 
+export type Option = {
+  optionId: bigint;
+  option: OptionsBoxValue;
+};
+
 export type OptionsBoxValue = {
   votes: bigint;
   description: string;
@@ -26,18 +31,19 @@ export const getGlobalState = async (client: OnChainVotingClient): Promise<Globa
   };
 };
 
-export const getOptions = async (client: OnChainVotingClient): Promise<OptionsBoxValue[]> => {
+export const getOptions = async (client: OnChainVotingClient): Promise<Option[]> => {
   const optionsBoxes = await client.appClient.getBoxValues((box) => box.name.startsWith('options'));
   const results = await Promise.all(
     optionsBoxes.map(async (box) => {
+      const optionId = decodeOptionsBoxName(box.name.nameRaw);
       const value = await client.appClient.getBoxValue(box.name.nameRaw);
-      return decodeOptionsBoxValue(value);
+      return { optionId, option: decodeOptionsBoxValue(value) };
     })
   );
 
-  results.sort((a: OptionsBoxValue, b: OptionsBoxValue): number => {
-    if (a.description > b.description) return 1;
-    if (a.description < b.description) return -1;
+  results.sort((a: Option, b: Option): number => {
+    if (a.option.description > b.option.description) return 1;
+    if (a.option.description < b.option.description) return -1;
     return 0;
   });
 
@@ -75,7 +81,7 @@ export async function getUserVotingPower(
     if (!boxName.name.startsWith('voters')) {
       return false;
     }
-    const decodedBox = decodeVoterBox(boxName.nameRaw);
+    const decodedBox = decodeVoterBoxName(boxName.nameRaw);
     if (decodedBox.address === userAddress) {
       decodedVoterBox = decodedBox;
       return true;
@@ -86,10 +92,16 @@ export async function getUserVotingPower(
   return voterBox ? decodedVoterBox : undefined;
 }
 
-export function decodeVoterBox(boxNameRaw: Uint8Array): { address: string; votingPower: bigint } {
+export function decodeVoterBoxName(boxNameRaw: Uint8Array): { address: string; votingPower: bigint } {
   const prefix = new TextEncoder().encode('voters');
   const withoutPrefix = boxNameRaw.slice(prefix.length);
   const address = encodeAddress(withoutPrefix.slice(0, 32));
   const votingPower = decodeUint64(withoutPrefix.slice(32, 40), 'bigint');
   return { address, votingPower };
+}
+
+export function decodeOptionsBoxName(boxNameRaw: Uint8Array): bigint {
+  const prefix = new TextEncoder().encode('options');
+  const withoutPrefix = boxNameRaw.slice(prefix.length);
+  return decodeUint64(withoutPrefix.slice(0, 8), 'bigint');
 }

@@ -2333,348 +2333,336 @@
   },
   {
     "teal": 500,
-    "source": "contracts/OnChainVoting.algo.ts:98",
+    "source": "contracts/OnChainVoting.algo.ts:99",
     "pc": [
-      519,
-      520
+      519
     ]
   },
   {
     "teal": 501,
-    "source": "contracts/OnChainVoting.algo.ts:98",
+    "source": "contracts/OnChainVoting.algo.ts:99",
     "pc": [
+      520,
       521
     ]
   },
   {
     "teal": 502,
-    "source": "contracts/OnChainVoting.algo.ts:98",
+    "source": "contracts/OnChainVoting.algo.ts:99",
     "pc": [
       522
     ]
   },
   {
-    "teal": 503,
-    "source": "contracts/OnChainVoting.algo.ts:98",
+    "teal": 506,
+    "source": "contracts/OnChainVoting.algo.ts:100",
     "pc": [
       523
     ]
   },
   {
-    "teal": 504,
-    "source": "contracts/OnChainVoting.algo.ts:98",
+    "teal": 507,
+    "source": "contracts/OnChainVoting.algo.ts:100",
     "pc": [
-      524
+      524,
+      525
     ]
   },
   {
     "teal": 508,
-    "source": "contracts/OnChainVoting.algo.ts:99",
+    "source": "contracts/OnChainVoting.algo.ts:100",
     "pc": [
-      525,
       526
     ]
   },
   {
     "teal": 509,
-    "source": "contracts/OnChainVoting.algo.ts:99",
+    "source": "contracts/OnChainVoting.algo.ts:95",
     "pc": [
       527
     ]
   },
   {
-    "teal": 510,
-    "source": "contracts/OnChainVoting.algo.ts:99",
+    "teal": 514,
+    "source": "contracts/OnChainVoting.algo.ts:103",
     "pc": [
-      528
-    ]
-  },
-  {
-    "teal": 511,
-    "source": "contracts/OnChainVoting.algo.ts:99",
-    "pc": [
-      529
-    ]
-  },
-  {
-    "teal": 512,
-    "source": "contracts/OnChainVoting.algo.ts:99",
-    "pc": [
-      530
-    ]
-  },
-  {
-    "teal": 516,
-    "source": "contracts/OnChainVoting.algo.ts:101",
-    "pc": [
-      531
-    ]
-  },
-  {
-    "teal": 517,
-    "source": "contracts/OnChainVoting.algo.ts:101",
-    "pc": [
+      528,
+      529,
+      530,
+      531,
       532,
       533
     ]
   },
   {
+    "teal": 517,
+    "source": "contracts/OnChainVoting.algo.ts:103",
+    "pc": [
+      534,
+      535,
+      536
+    ]
+  },
+  {
     "teal": 518,
-    "source": "contracts/OnChainVoting.algo.ts:101",
+    "source": "contracts/OnChainVoting.algo.ts:103",
     "pc": [
-      534
-    ]
-  },
-  {
-    "teal": 522,
-    "source": "contracts/OnChainVoting.algo.ts:102",
-    "pc": [
-      535
-    ]
-  },
-  {
-    "teal": 523,
-    "source": "contracts/OnChainVoting.algo.ts:102",
-    "pc": [
-      536,
-      537
-    ]
-  },
-  {
-    "teal": 524,
-    "source": "contracts/OnChainVoting.algo.ts:102",
-    "pc": [
-      538
-    ]
-  },
-  {
-    "teal": 525,
-    "source": "contracts/OnChainVoting.algo.ts:95",
-    "pc": [
+      537,
+      538,
       539
     ]
   },
   {
-    "teal": 530,
-    "source": "contracts/OnChainVoting.algo.ts:105",
+    "teal": 519,
+    "source": "contracts/OnChainVoting.algo.ts:103",
     "pc": [
-      540,
+      540
+    ]
+  },
+  {
+    "teal": 520,
+    "source": "contracts/OnChainVoting.algo.ts:103",
+    "pc": [
       541,
-      542,
-      543,
-      544,
+      542
+    ]
+  },
+  {
+    "teal": 521,
+    "source": "contracts/OnChainVoting.algo.ts:103",
+    "pc": [
+      543
+    ]
+  },
+  {
+    "teal": 522,
+    "source": "contracts/OnChainVoting.algo.ts:103",
+    "pc": [
+      544
+    ]
+  },
+  {
+    "teal": 523,
+    "source": "contracts/OnChainVoting.algo.ts:103",
+    "pc": [
       545
     ]
   },
   {
-    "teal": 533,
-    "source": "contracts/OnChainVoting.algo.ts:105",
+    "teal": 524,
+    "source": "contracts/OnChainVoting.algo.ts:103",
     "pc": [
-      546,
-      547,
-      548
+      546
     ]
   },
   {
-    "teal": 534,
-    "source": "contracts/OnChainVoting.algo.ts:105",
+    "teal": 525,
+    "source": "contracts/OnChainVoting.algo.ts:103",
     "pc": [
+      547
+    ]
+  },
+  {
+    "teal": 529,
+    "source": "contracts/OnChainVoting.algo.ts:103",
+    "pc": [
+      548,
       549,
-      550,
-      551
+      550
     ]
   },
   {
-    "teal": 535,
-    "source": "contracts/OnChainVoting.algo.ts:105",
+    "teal": 533,
+    "source": "contracts/OnChainVoting.algo.ts:104",
     "pc": [
+      551,
       552
     ]
   },
   {
-    "teal": 536,
-    "source": "contracts/OnChainVoting.algo.ts:105",
+    "teal": 534,
+    "source": "contracts/OnChainVoting.algo.ts:104",
     "pc": [
-      553,
+      553
+    ]
+  },
+  {
+    "teal": 535,
+    "source": "contracts/OnChainVoting.algo.ts:104",
+    "pc": [
       554
     ]
   },
   {
-    "teal": 537,
-    "source": "contracts/OnChainVoting.algo.ts:105",
+    "teal": 536,
+    "source": "contracts/OnChainVoting.algo.ts:104",
     "pc": [
       555
     ]
   },
   {
-    "teal": 538,
-    "source": "contracts/OnChainVoting.algo.ts:105",
+    "teal": 537,
+    "source": "contracts/OnChainVoting.algo.ts:104",
     "pc": [
       556
     ]
   },
   {
-    "teal": 539,
-    "source": "contracts/OnChainVoting.algo.ts:105",
+    "teal": 538,
+    "source": "contracts/OnChainVoting.algo.ts:104",
     "pc": [
-      557
-    ]
-  },
-  {
-    "teal": 540,
-    "source": "contracts/OnChainVoting.algo.ts:105",
-    "pc": [
-      558
-    ]
-  },
-  {
-    "teal": 541,
-    "source": "contracts/OnChainVoting.algo.ts:105",
-    "pc": [
+      557,
+      558,
       559
     ]
   },
   {
-    "teal": 545,
-    "source": "contracts/OnChainVoting.algo.ts:105",
+    "teal": 539,
+    "source": "contracts/OnChainVoting.algo.ts:104",
     "pc": [
       560,
-      561,
-      562
+      561
     ]
   },
   {
-    "teal": 549,
-    "source": "contracts/OnChainVoting.algo.ts:106",
+    "teal": 540,
+    "source": "contracts/OnChainVoting.algo.ts:104",
     "pc": [
-      563,
+      562,
+      563
+    ]
+  },
+  {
+    "teal": 541,
+    "source": "contracts/OnChainVoting.algo.ts:104",
+    "pc": [
       564
     ]
   },
   {
-    "teal": 550,
-    "source": "contracts/OnChainVoting.algo.ts:106",
+    "teal": 542,
+    "source": "contracts/OnChainVoting.algo.ts:104",
     "pc": [
       565
     ]
   },
   {
-    "teal": 551,
-    "source": "contracts/OnChainVoting.algo.ts:106",
+    "teal": 545,
+    "source": "contracts/OnChainVoting.algo.ts:103",
     "pc": [
       566
     ]
   },
   {
-    "teal": 552,
-    "source": "contracts/OnChainVoting.algo.ts:106",
+    "teal": 550,
+    "source": "contracts/OnChainVoting.algo.ts:107",
     "pc": [
-      567
+      567,
+      568,
+      569
     ]
   },
   {
-    "teal": 553,
-    "source": "contracts/OnChainVoting.algo.ts:106",
+    "teal": 551,
+    "source": "contracts/OnChainVoting.algo.ts:107",
     "pc": [
-      568
+      570
     ]
   },
   {
     "teal": 554,
-    "source": "contracts/OnChainVoting.algo.ts:106",
+    "source": "contracts/OnChainVoting.algo.ts:107",
     "pc": [
-      569,
-      570,
-      571
-    ]
-  },
-  {
-    "teal": 555,
-    "source": "contracts/OnChainVoting.algo.ts:106",
-    "pc": [
+      571,
       572,
       573
     ]
   },
   {
-    "teal": 556,
-    "source": "contracts/OnChainVoting.algo.ts:106",
+    "teal": 555,
+    "source": "contracts/OnChainVoting.algo.ts:107",
     "pc": [
-      574,
+      574
+    ]
+  },
+  {
+    "teal": 556,
+    "source": "contracts/OnChainVoting.algo.ts:107",
+    "pc": [
       575
     ]
   },
   {
-    "teal": 557,
-    "source": "contracts/OnChainVoting.algo.ts:106",
+    "teal": 560,
+    "source": "contracts/OnChainVoting.algo.ts:107",
     "pc": [
-      576
-    ]
-  },
-  {
-    "teal": 558,
-    "source": "contracts/OnChainVoting.algo.ts:106",
-    "pc": [
-      577
-    ]
-  },
-  {
-    "teal": 561,
-    "source": "contracts/OnChainVoting.algo.ts:105",
-    "pc": [
+      576,
+      577,
       578
     ]
   },
   {
-    "teal": 566,
-    "source": "contracts/OnChainVoting.algo.ts:109",
+    "teal": 564,
+    "source": "contracts/OnChainVoting.algo.ts:108",
     "pc": [
       579,
-      580,
-      581
+      580
     ]
   },
   {
-    "teal": 567,
-    "source": "contracts/OnChainVoting.algo.ts:109",
+    "teal": 565,
+    "source": "contracts/OnChainVoting.algo.ts:108",
     "pc": [
-      582
+      581,
+      582,
+      583
     ]
   },
   {
-    "teal": 570,
-    "source": "contracts/OnChainVoting.algo.ts:109",
+    "teal": 566,
+    "source": "contracts/OnChainVoting.algo.ts:108",
     "pc": [
-      583,
       584,
       585
     ]
   },
   {
-    "teal": 571,
-    "source": "contracts/OnChainVoting.algo.ts:109",
+    "teal": 567,
+    "source": "contracts/OnChainVoting.algo.ts:108",
     "pc": [
       586
     ]
   },
   {
-    "teal": 572,
-    "source": "contracts/OnChainVoting.algo.ts:109",
+    "teal": 568,
+    "source": "contracts/OnChainVoting.algo.ts:108",
     "pc": [
       587
     ]
   },
   {
-    "teal": 576,
-    "source": "contracts/OnChainVoting.algo.ts:109",
+    "teal": 569,
+    "source": "contracts/OnChainVoting.algo.ts:108",
     "pc": [
-      588,
-      589,
+      588
+    ]
+  },
+  {
+    "teal": 577,
+    "source": "contracts/OnChainVoting.algo.ts:110",
+    "pc": [
+      589
+    ]
+  },
+  {
+    "teal": 578,
+    "source": "contracts/OnChainVoting.algo.ts:110",
+    "pc": [
       590
     ]
   },
   {
-    "teal": 580,
+    "teal": 579,
     "source": "contracts/OnChainVoting.algo.ts:110",
     "pc": [
       591,
@@ -2682,8 +2670,8 @@
     ]
   },
   {
-    "teal": 581,
-    "source": "contracts/OnChainVoting.algo.ts:110",
+    "teal": 583,
+    "source": "contracts/OnChainVoting.algo.ts:111",
     "pc": [
       593,
       594,
@@ -2691,50 +2679,38 @@
     ]
   },
   {
-    "teal": 582,
-    "source": "contracts/OnChainVoting.algo.ts:110",
+    "teal": 584,
+    "source": "contracts/OnChainVoting.algo.ts:111",
     "pc": [
       596,
       597
     ]
   },
   {
-    "teal": 583,
-    "source": "contracts/OnChainVoting.algo.ts:110",
+    "teal": 585,
+    "source": "contracts/OnChainVoting.algo.ts:111",
     "pc": [
       598
     ]
   },
   {
-    "teal": 584,
-    "source": "contracts/OnChainVoting.algo.ts:110",
+    "teal": 586,
+    "source": "contracts/OnChainVoting.algo.ts:111",
     "pc": [
-      599
-    ]
-  },
-  {
-    "teal": 585,
-    "source": "contracts/OnChainVoting.algo.ts:110",
-    "pc": [
+      599,
       600
     ]
   },
   {
-    "teal": 593,
+    "teal": 590,
     "source": "contracts/OnChainVoting.algo.ts:112",
     "pc": [
-      601
-    ]
-  },
-  {
-    "teal": 594,
-    "source": "contracts/OnChainVoting.algo.ts:112",
-    "pc": [
+      601,
       602
     ]
   },
   {
-    "teal": 595,
+    "teal": 591,
     "source": "contracts/OnChainVoting.algo.ts:112",
     "pc": [
       603,
@@ -2742,123 +2718,99 @@
     ]
   },
   {
-    "teal": 599,
+    "teal": 595,
     "source": "contracts/OnChainVoting.algo.ts:113",
     "pc": [
-      605,
+      605
+    ]
+  },
+  {
+    "teal": 596,
+    "source": "contracts/OnChainVoting.algo.ts:113",
+    "pc": [
       606,
       607
     ]
   },
   {
-    "teal": 600,
-    "source": "contracts/OnChainVoting.algo.ts:113",
+    "teal": 599,
+    "source": "contracts/OnChainVoting.algo.ts:110",
     "pc": [
-      608,
+      608
+    ]
+  },
+  {
+    "teal": 600,
+    "source": "contracts/OnChainVoting.algo.ts:107",
+    "pc": [
       609
     ]
   },
   {
-    "teal": 601,
-    "source": "contracts/OnChainVoting.algo.ts:113",
+    "teal": 603,
+    "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      610
-    ]
-  },
-  {
-    "teal": 602,
-    "source": "contracts/OnChainVoting.algo.ts:113",
-    "pc": [
+      610,
       611,
-      612
-    ]
-  },
-  {
-    "teal": 606,
-    "source": "contracts/OnChainVoting.algo.ts:114",
-    "pc": [
+      612,
       613,
-      614
+      614,
+      615
     ]
   },
   {
-    "teal": 607,
-    "source": "contracts/OnChainVoting.algo.ts:114",
+    "teal": 604,
+    "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      615,
-      616
+      616,
+      617,
+      618
+    ]
+  },
+  {
+    "teal": 605,
+    "source": "contracts/OnChainVoting.algo.ts:18",
+    "pc": [
+      619,
+      620,
+      621,
+      622
+    ]
+  },
+  {
+    "teal": 608,
+    "source": "contracts/OnChainVoting.algo.ts:18",
+    "errorMessage": "this contract does not implement the given ABI method for create NoOp",
+    "pc": [
+      623
     ]
   },
   {
     "teal": 611,
-    "source": "contracts/OnChainVoting.algo.ts:115",
+    "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      617
+      624,
+      625,
+      626,
+      627,
+      628,
+      629
     ]
   },
   {
     "teal": 612,
-    "source": "contracts/OnChainVoting.algo.ts:115",
-    "pc": [
-      618,
-      619
-    ]
-  },
-  {
-    "teal": 615,
-    "source": "contracts/OnChainVoting.algo.ts:112",
-    "pc": [
-      620
-    ]
-  },
-  {
-    "teal": 616,
-    "source": "contracts/OnChainVoting.algo.ts:109",
-    "pc": [
-      621
-    ]
-  },
-  {
-    "teal": 619,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      622,
-      623,
-      624,
-      625,
-      626,
-      627
-    ]
-  },
-  {
-    "teal": 620,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "pc": [
-      628,
-      629,
-      630
-    ]
-  },
-  {
-    "teal": 621,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "pc": [
+      630,
       631,
       632,
       633,
-      634
-    ]
-  },
-  {
-    "teal": 624,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "errorMessage": "this contract does not implement the given ABI method for create NoOp",
-    "pc": [
+      634,
       635
     ]
   },
   {
-    "teal": 627,
+    "teal": 613,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
       636,
@@ -2870,7 +2822,7 @@
     ]
   },
   {
-    "teal": 628,
+    "teal": 614,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
       642,
@@ -2882,7 +2834,7 @@
     ]
   },
   {
-    "teal": 629,
+    "teal": 615,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
       648,
@@ -2894,7 +2846,7 @@
     ]
   },
   {
-    "teal": 630,
+    "teal": 616,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
       654,
@@ -2906,7 +2858,7 @@
     ]
   },
   {
-    "teal": 631,
+    "teal": 617,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
       660,
@@ -2918,7 +2870,7 @@
     ]
   },
   {
-    "teal": 632,
+    "teal": 618,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
       666,
@@ -2930,167 +2882,203 @@
     ]
   },
   {
-    "teal": 633,
+    "teal": 619,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
       672,
       673,
-      674,
-      675,
-      676,
-      677
+      674
     ]
   },
   {
-    "teal": 634,
+    "teal": 620,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
+      675,
+      676,
+      677,
       678,
       679,
       680,
       681,
       682,
-      683
+      683,
+      684,
+      685,
+      686,
+      687,
+      688,
+      689,
+      690,
+      691,
+      692
+    ]
+  },
+  {
+    "teal": 623,
+    "source": "contracts/OnChainVoting.algo.ts:18",
+    "errorMessage": "this contract does not implement the given ABI method for call NoOp",
+    "pc": [
+      693
+    ]
+  },
+  {
+    "teal": 626,
+    "source": "contracts/OnChainVoting.algo.ts:18",
+    "pc": [
+      694,
+      695,
+      696
+    ]
+  },
+  {
+    "teal": 627,
+    "source": "contracts/OnChainVoting.algo.ts:18",
+    "pc": [
+      697,
+      698
+    ]
+  },
+  {
+    "teal": 628,
+    "source": "contracts/OnChainVoting.algo.ts:18",
+    "pc": [
+      699,
+      700
+    ]
+  },
+  {
+    "teal": 629,
+    "source": "contracts/OnChainVoting.algo.ts:18",
+    "pc": [
+      701
+    ]
+  },
+  {
+    "teal": 630,
+    "source": "contracts/OnChainVoting.algo.ts:18",
+    "pc": [
+      702,
+      703
+    ]
+  },
+  {
+    "teal": 631,
+    "source": "contracts/OnChainVoting.algo.ts:18",
+    "pc": [
+      704,
+      705
+    ]
+  },
+  {
+    "teal": 632,
+    "source": "contracts/OnChainVoting.algo.ts:18",
+    "pc": [
+      706
     ]
   },
   {
     "teal": 635,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      684,
-      685,
-      686
+      707,
+      708,
+      709
     ]
   },
   {
     "teal": 636,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      687,
-      688,
-      689,
-      690,
-      691,
-      692,
-      693,
-      694,
-      695,
-      696,
-      697,
-      698,
-      699,
-      700,
-      701,
-      702,
-      703,
-      704
+      710,
+      711
+    ]
+  },
+  {
+    "teal": 637,
+    "source": "contracts/OnChainVoting.algo.ts:18",
+    "pc": [
+      712,
+      713
+    ]
+  },
+  {
+    "teal": 638,
+    "source": "contracts/OnChainVoting.algo.ts:18",
+    "pc": [
+      714
     ]
   },
   {
     "teal": 639,
     "source": "contracts/OnChainVoting.algo.ts:18",
-    "errorMessage": "this contract does not implement the given ABI method for call NoOp",
     "pc": [
-      705
+      715,
+      716
+    ]
+  },
+  {
+    "teal": 640,
+    "source": "contracts/OnChainVoting.algo.ts:18",
+    "pc": [
+      717,
+      718
+    ]
+  },
+  {
+    "teal": 641,
+    "source": "contracts/OnChainVoting.algo.ts:18",
+    "pc": [
+      719
     ]
   },
   {
     "teal": 642,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      706,
-      707,
-      708
+      720
     ]
   },
   {
     "teal": 643,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      709,
-      710
+      721,
+      722
     ]
   },
   {
     "teal": 644,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      711,
-      712
+      723
     ]
   },
   {
     "teal": 645,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      713
+      724
     ]
   },
   {
     "teal": 646,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      714,
-      715
+      725
     ]
   },
   {
     "teal": 647,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      716,
-      717
-    ]
-  },
-  {
-    "teal": 648,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "pc": [
-      718
-    ]
-  },
-  {
-    "teal": 651,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "pc": [
-      719,
-      720,
-      721
-    ]
-  },
-  {
-    "teal": 652,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "pc": [
-      722,
-      723
-    ]
-  },
-  {
-    "teal": 653,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "pc": [
-      724,
-      725
-    ]
-  },
-  {
-    "teal": 654,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "pc": [
-      726
-    ]
-  },
-  {
-    "teal": 655,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "pc": [
+      726,
       727,
       728
     ]
   },
   {
-    "teal": 656,
+    "teal": 648,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
       729,
@@ -3098,59 +3086,53 @@
     ]
   },
   {
-    "teal": 657,
+    "teal": 649,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      731
-    ]
-  },
-  {
-    "teal": 658,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "pc": [
+      731,
       732
     ]
   },
   {
-    "teal": 659,
+    "teal": 650,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      733,
+      733
+    ]
+  },
+  {
+    "teal": 651,
+    "source": "contracts/OnChainVoting.algo.ts:18",
+    "pc": [
       734
     ]
   },
   {
-    "teal": 660,
+    "teal": 652,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      735
-    ]
-  },
-  {
-    "teal": 661,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "pc": [
+      735,
       736
     ]
   },
   {
-    "teal": 662,
+    "teal": 653,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      737
+      737,
+      738
     ]
   },
   {
-    "teal": 663,
+    "teal": 654,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      738,
       739,
       740
     ]
   },
   {
-    "teal": 664,
+    "teal": 655,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
       741,
@@ -3158,64 +3140,10 @@
     ]
   },
   {
-    "teal": 665,
+    "teal": 656,
     "source": "contracts/OnChainVoting.algo.ts:18",
     "pc": [
-      743,
-      744
-    ]
-  },
-  {
-    "teal": 666,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "pc": [
-      745
-    ]
-  },
-  {
-    "teal": 667,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "pc": [
-      746
-    ]
-  },
-  {
-    "teal": 668,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "pc": [
-      747,
-      748
-    ]
-  },
-  {
-    "teal": 669,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "pc": [
-      749,
-      750
-    ]
-  },
-  {
-    "teal": 670,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "pc": [
-      751,
-      752
-    ]
-  },
-  {
-    "teal": 671,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "pc": [
-      753,
-      754
-    ]
-  },
-  {
-    "teal": 672,
-    "source": "contracts/OnChainVoting.algo.ts:18",
-    "pc": [
-      755
+      743
     ]
   }
 ]

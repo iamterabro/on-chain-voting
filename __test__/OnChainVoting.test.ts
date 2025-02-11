@@ -57,8 +57,10 @@ describe('OnChainVoting', () => {
       await addVotingOption(appClient, { optionId: 2, description: 'Option 2' });
 
       const options = await getOptions(appClient);
-      expect(options[0].description).toEqual('Option 1');
-      expect(options[1].description).toEqual('Option 2');
+      expect(options[0].optionId).toEqual(BigInt(1));
+      expect(options[0].option.description).toEqual('Option 1');
+      expect(options[1].optionId).toEqual(BigInt(2));
+      expect(options[1].option.description).toEqual('Option 2');
     });
 
     test('adds voters', async () => {
@@ -104,11 +106,11 @@ describe('OnChainVoting', () => {
 
     test('stores the correct voting results', async () => {
       const results = await getOptions(appClient);
-      expect(results[0].description).toEqual('Option 1');
-      expect(results[0].votes).toEqual(BigInt(1));
+      expect(results[0].optionId).toEqual(BigInt(1));
+      expect(results[0].option.votes).toEqual(BigInt(1));
 
-      expect(results[1].description).toEqual('Option 2');
-      expect(results[1].votes).toEqual(BigInt(2));
+      expect(results[1].optionId).toEqual(BigInt(2));
+      expect(results[1].option.votes).toEqual(BigInt(2));
     });
 
     test('get the proposal', async () => {

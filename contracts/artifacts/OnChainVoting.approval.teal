@@ -495,29 +495,13 @@ updateTimes:
 	<
 	assert
 
-	// contracts/OnChainVoting.algo.ts:98
-	// assert(start < this.votingEnd.value)
-	frame_dig -1 // start: uint64
-	bytec 3 //  "end"
-	app_global_get
-	<
-	assert
-
 	// contracts/OnChainVoting.algo.ts:99
-	// assert(end > this.votingStart.value)
-	frame_dig -2 // end: uint64
-	bytec 2 //  "start"
-	app_global_get
-	>
-	assert
-
-	// contracts/OnChainVoting.algo.ts:101
 	// this.votingStart.value = start
 	bytec 2 //  "start"
 	frame_dig -1 // start: uint64
 	app_global_put
 
-	// contracts/OnChainVoting.algo.ts:102
+	// contracts/OnChainVoting.algo.ts:100
 	// this.votingEnd.value = end
 	bytec 3 //  "end"
 	frame_dig -2 // end: uint64
@@ -544,7 +528,7 @@ updateTimes:
 canEdit:
 	proto 0 1
 
-	// contracts/OnChainVoting.algo.ts:106
+	// contracts/OnChainVoting.algo.ts:104
 	// return globals.latestTimestamp < this.votingStart.value && this.txn.sender === globals.creatorAddress;
 	global LatestTimestamp
 	bytec 2 //  "start"
@@ -575,7 +559,7 @@ canEdit:
 withdraw:
 	proto 1 0
 
-	// contracts/OnChainVoting.algo.ts:110
+	// contracts/OnChainVoting.algo.ts:108
 	// assert(this.txn.sender === this.app.creator)
 	txn Sender
 	txna Applications 0
@@ -584,7 +568,7 @@ withdraw:
 	==
 	assert
 
-	// contracts/OnChainVoting.algo.ts:112
+	// contracts/OnChainVoting.algo.ts:110
 	// sendPayment({
 	//       receiver: this.app.creator,
 	//       amount: amount,
@@ -594,19 +578,19 @@ withdraw:
 	intc 0 //  pay
 	itxn_field TypeEnum
 
-	// contracts/OnChainVoting.algo.ts:113
+	// contracts/OnChainVoting.algo.ts:111
 	// receiver: this.app.creator
 	txna Applications 0
 	app_params_get AppCreator
 	pop
 	itxn_field Receiver
 
-	// contracts/OnChainVoting.algo.ts:114
+	// contracts/OnChainVoting.algo.ts:112
 	// amount: amount
 	frame_dig -1 // amount: uint64
 	itxn_field Amount
 
-	// contracts/OnChainVoting.algo.ts:115
+	// contracts/OnChainVoting.algo.ts:113
 	// fee: 0
 	intc 1 // 0
 	itxn_field Fee

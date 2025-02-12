@@ -47,8 +47,8 @@ export const getOptions = async (client: OnChainVotingClient): Promise<Option[]>
   );
 
   results.sort((a: Option, b: Option): number => {
-    if (a.option.description > b.option.description) return 1;
-    if (a.option.description < b.option.description) return -1;
+    if (a.optionId > b.optionId) return 1;
+    if (a.optionId < b.optionId) return -1;
     return 0;
   });
 
